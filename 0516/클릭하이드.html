@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script src="../js/jquery-3.7.1.js"></script>
+<script>
+//h2를 검색 - onclick이벤트 핸들러
+//$(document).ready(function(){
+$(function(){
+	
+	//h2를 검색 - onclick이벤트 핸들러 
+	$('h2').on('click',function(){
+		//this.style.display = "none";
+		//$(this).css('display','none');
+		
+		$(this).hide();
+		
+		//다 사라졌는지 비교 - 보이는 갯수가 0개이면
+		if($('h2:visible').length <1){
+			//버튼을 보이도록 설정
+			$('#btn1').show();
+		}
+	})//$('h2').on('click')
+	
+	$('#btn1').on('click', function(){
+		//h2 요소 전체를 보이도록 설정
+		$('h2').show();
+		//$('h2').css('display','block')
+		
+		//button을 다시 안보이도록 설정
+		$(this).hide();
+	})
+})
+</script>
+<style>
+#btn1{
+	display : none;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+
+<h3>h2요소를 클릭하면 사라진다<br>
+this.style.display = "none";<br>
+$(this).css('display','none');<br>
+$(this).hide();<br>
+
+버튼을 생성해서 초기설정은 안보이도록<br>
+h2요소가 다 사라지면 button을 보이도록 설정<br>
+button을 클릭하면 h2요소가 다시 보여지도록 한다.</h3>
+	<br><br>
+	<input type="button" id="btn1" value="보이기">
+	<div id="result1">
+	<h2>클릭하면 사라집니다1</h2>
+	<h2>클릭하면 사라집니다2</h2>
+	<h2>클릭하면 사라집니다3</h2>
+	<h2>클릭하면 사라집니다4</h2>
+	<h2>클릭하면 사라집니다5</h2>
+	<h2>클릭하면 사라집니다6</h2>
+	<h2>클릭하면 사라집니다7</h2>
+	<h2>클릭하면 사라집니다8</h2>
+	<h2>클릭하면 사라집니다9</h2>
+	<h2>클릭하면 사라집니다10</h2>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script src="../js/jquery-3.7.1.js"></script>
+<script>
+$(()=>{
+	$('#btn1').on('click', ()=>{
+		$('#result1 div:empty').css('border', '3px solid pink');
+		
+		$('#result1 div:parent').css('border', '5px solid green');
+		
+		$('#result1 span:contains(jQuery)').css('border', '5px solid blue');
+		
+		//jQuary글자가 포함되지 않은 span
+		$('#result1 span:not(:contains(jQuery))').css('color','red')
+												.css('font-size','1.5rem')
+												.css('font-weight','bold');
+		//span이 포함된 div태그를 선택
+		$('#result1 div:has(span)').css('border', '5px inset skyblue')
+	})
+})
+</script>
+</head>
+<body>
+
+<div class="box">
+
+<h3></h3>
+	<input type="button" value="확인" id="btn1">
+	<br><br>
+	
+	<div id="result1">
+	<div></div>
+	
+	<div>헬로우~~
+		<span>오늘도 즐겁게~열심히!</span>
+	</div>
+	
+	<p>Hello jQuery! <span>Thanks, jQuery!</span></p>
+	
+	<div class="myClass">jQuery!</div>
+	<span class="notMyClass">쉬운 jQuery~~!</span>
+	
+	<div></div>
+	
+	</div>
+</div>
+</body>
+</html>

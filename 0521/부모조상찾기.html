@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+	
+	$('#parent').on('click', ()=>{
+	 $("#result1 span").parent().css({"color": "red", "border": "2px solid red"});
+	})
+	
+	$('#parents').on('click', ()=>{
+	 $("#result1 span").parents().css({"color": "blue", "border": "2px solid blue"});
+	})
+	
+	$('#parents_se').on('click', ()=>{
+	 $("#result1 span").parents('ul').css({"color": "green", "border": "2px solid green"});
+	})
+	
+	$('#parents_un').on('click', ()=>{
+	 $("#result1 span").parentsUntil('#result1').css({"color": "hotpink", "border": "2px solid hotpink"});
+	})
+	
+	$('button[type=button]').on('click', function(){
+		
+		$(this).parents('ul').find('span').css('background', 'pink');
+	})
+})
+</script>
+<style>
+.ancestors * { 
+  display: block;
+  border: 2px solid lightgrey;
+  color: lightgrey;
+  padding: 5px;
+  margin: 15px;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+
+<h3></h3>
+	<input type="button" value="parent" id="parent">
+	<input type="button" value="parent" id="parents">
+	<input type="button" value="parents_se" id="parents_se">
+	<input type="button" value="parents_un" id="parents_un">
+	<br><br>
+	
+	<div id="result1" class="ancestors">
+	<div style="width:500px;">div (great-grandparent)
+    <ul>ul (grandparent)  
+      <li>li (direct parent)
+        <span>span</span>
+      </li>
+      <button type="button">확인</button>
+    </ul>   
+  </div>
+	</div>
+	
+	
+	<div id="result2" class="ancestors">
+	<div style="width:500px;">div (great-grandparent)
+    <ul>ul (grandparent)  
+      <li>li (direct parent)
+        <span>span</span>
+      </li>
+      <button type="button">확인</button>
+    </ul>   
+  </div>
+	</div>
+	
+	
+	<div id="result3" class="ancestors">
+	<div style="width:500px;">div (great-grandparent)
+    <ul>ul (grandparent)  
+      <li>li (direct parent)
+        <span>span</span>
+      </li>
+      <button type="button">확인</button>
+    </ul>   
+  </div>
+	</div>
+</div>
+</body>
+</html>

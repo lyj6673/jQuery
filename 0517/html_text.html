@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script src="../js/jquery-3.7.1.js"></script>
+<script>
+const proc1 = () => {
+	//body안의 모든 내용 가져오기 - 태그를 포함해서
+	//body태그 검색
+	//alert($('body').html());
+	
+	//body안의 모든 내용 가져오기 - 태그빼고 문자만
+	//body태그 검색
+	alert($('body').text());
+}
+
+const proc2 = () => {
+	//p태그를 검색 - 첫번째 꺼만
+	//alert($('p').html());
+	
+	//모든 p태그를 대상으로 문자만
+	//alert($('p').text());
+	
+	//모든 p태그를 대상으로 할 때는 반복문을 사용
+	//p[0] p[1] p[2]
+	//k= p[0] k=p[1] k=p[2]
+	// i, k변수는 옵션으로 생략가능
+	let str = "";
+	let out = "";
+	//$('p').each(function(){
+		
+	$.each($('p'), function(i,k){
+		
+		//str += $('p').eq(i).html() + "\n"
+		//str += $('p').html() + "\n"
+		//str += $(k).html() + "\n";
+		
+		//가져오기 - html태그를 포함해서 - <span>
+		//str += $(this).html() + "\n";
+		//out += $(this).html() + "<br>";
+		
+		//가져오기 - html태그를 포함하지 않고
+		str += $(this).text() + "\n";
+		out += $(this).text() + "<br>";
+	})
+	
+	alert(str);
+	//result2에 출력
+	//document.getElementById('result2').innerHTML = out;
+	$('#result2').html(out);
+}
+</script>
+<style>
+span{
+	background : orange;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+
+<h3>
+body태그를 대상으로<br>
+html() : 태그를 포함한 전체 내용 가져오기 - innerHTML<br>
+text() : 태그를 뺀 전체 내용만 가져오기 - innerText<br></h3>
+	<input type="button" value="확인" onclick="proc1()">
+	<br><br>
+	
+	<div id="result1"></div>
+</div>
+
+<div class="box">
+
+<h3>
+body태그를 대상으로<br>
+html() : 태그를 포함한 전체 내용 가져오기 - innerHTML<br>
+text() : 태그를 뺀 전체 내용만 가져오기 - innerText<br></h3>
+	<input type="button" value="확인" onclick="proc2()">
+	<br><br>
+	
+	<div id="result2"></div>
+	
+	<p><span>무궁화</span> 꽃이 피었습니다</p>
+	<p><span>진달래</span> 꽃이 피었습니다</p>
+	<p><span>수선화</span> 꽃이 피었습니다</p>
+</div>
+</body>
+</html>

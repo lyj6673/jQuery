@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script src="http://localhost/jqpro/js/jquery-3.7.1.js"></script>
+<script>
+$(document).ready(() =>{
+// 	let vh1 = document.getElementsByTagName('h1');
+// 	vh1[2].style.backgroundColor = "blue";
+	
+// 	for(i=0; i<vh1.length;i++){
+// 		vh1[i].style.backgroundColor = "pink";
+		
+// 		//이벤트 핸들러 - 클릭 대상
+// 		vh1[i].addEventListener('click', function(){
+// 			this.style.color ='red';
+// 		})
+// 	}
+
+// 	script 방식
+// 	for(i=0; i<vh1.length; i++){
+// 		vh1[i].style.backgroundColor = "red";
+// 	}
+
+	//jquery방식
+	let vh1 = $('h1');
+	vh1.css('background-color', 'silver');
+	vh1.eq(2).css('background-color', 'blue');
+	
+	//이벤트 핸들러
+	vh1.on('click', function(){
+		
+		//this dom요소를 객체로 받은 변수 - dom변수
+		//this.style.color = 'red';
+		
+		//dom변수로 css() jquery함수를 사용할 수 없다.
+		//this.css('color','red') --실행시 오류
+		
+		//$()감싸면 jquery변수로 변환
+		$(this).css('color','red');
+	})
+})
+</script>
+</head>
+<body>
+
+<div class="box">
+
+<h3>h1를 클릭 했을 때 이벤트</h3>
+	<h1>무궁화 꽃이 피었습니다</h1>
+	<h1>무궁화 꽃이 피었습니다</h1>
+	<h1>무궁화 꽃이 피었습니다</h1>
+	<h1>무궁화 꽃이 피었습니다</h1>
+	<h1>무궁화 꽃이 피었습니다</h1>
+	<h1>무궁화 꽃이 피었습니다</h1>
+	<h1>무궁화 꽃이 피었습니다</h1>
+	<h1>무궁화 꽃이 피었습니다</h1>
+	<h1>무궁화 꽃이 피었습니다</h1>
+	<h1>무궁화 꽃이 피었습니다</h1>
+	<br><br>
+	
+	<div id="result1"></div>
+</div>
+</body>
+</html>
