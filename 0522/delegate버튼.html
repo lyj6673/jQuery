@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script src="../js/jquery-3.7.1.js"></script>
+<script>
+$(()=>{
+	
+	
+	//bind방식 핸들러 작성
+	$('#add').on('click', function(){
+		
+		//새로운 버튼 생성
+		vbtn = $("<input type='button' value='새로운버튼' class='newb'>");
+		//result1에 추가
+		$("#result1").append(vbtn);
+		
+		//새로운내용.appendTo(부모)
+		//부모.append(새로운내용)
+	})
+	
+	//해제버튼 이벤트 핸들러
+	$('#stop').on('click', function(){
+		$('.add').off('click');
+	})
+	
+	//새로운 버튼의 이벤트 핸들러 - delegate방식
+	$(document).on('click', '.newb', function(){
+		cr = parseInt(Math.random() * 256);
+		cg = parseInt(Math.random() * 256);
+		cb = parseInt(Math.random() * 256);
+		
+		$('#result2').css('background', `rgb(${cr},${cg},${cb})`);
+	})
+	
+})
+</script>
+</head>
+<body>
+
+<div class="box">
+
+<h3>추가버튼 클릭시 새로운 버튼을 생성<br>
+새로운 버튼을 클릭시 result2의 배경색변경<br>
+해제버튼 클릭시 더이상 새로운 버튼을 생성하지 않는다</h3>
+	<input type="button" value="추가" id="add">
+	<input type="button" value="해제" id="stop">
+	<br><br>
+	
+	<div id="result1"></div>
+	<div id="result2"></div>
+</div>
+</body>
+</html>

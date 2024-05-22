@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script src="../js/jquery-3.7.1.js"></script>
+<script>
+$(()=>{
+	$('#btn1').on('click', ()=>{
+		//현재의 상태값을 가져온다
+		vchk = $('#checkTest').prop('checked');
+		vsel = $('#selTest option').eq(2).prop('selected');
+		vtxt = $('#selected').prop('readonly');
+		vbut = $('#runBtn').prop('disabled');
+		
+		console.log(vchk, vsel, vtxt, vbut);
+		
+		//반대로 설정
+		vchk = $('#checkTest').prop('checked',!vchk);
+		vsel = $('#selTest option').eq(2).prop('selected', !vsel);
+		vtxt = $('#selected').prop('readonly', !vtxt);
+		vbut = $('#runBtn').prop('disabled', !vbut);
+	})
+	
+	//전체 선택의 체크가 변경되면
+	$('#checkAll').one('change', function(){
+		//전체선택의 체크(checked) 상태값을 가져온다
+		vcheck = $('#checkAll').prop('checked');
+			
+		//class="check"의 체크 상태값 vcheck값으로 변경한다.
+		$('.check').prop('checked', vcheck);
+	})
+})
+</script>
+</head>
+<body>
+<div class="box">
+
+<h3>전체 선택이 변경되면 그 값으로 </h3>
+	<input type="button" value="확인" id="btn2">
+	<br><br>
+	
+	<div id="result2">
+		<input type="checkbox" id="checkAll" checked>전체선택<br><br>
+		
+		<input type="checkbox" class="check">1
+		<input type="checkbox" class="check">2
+		<input type="checkbox" class="check">3
+		<input type="checkbox" class="check">4
+		<input type="checkbox" class="check">5
+	</div>
+</div>
+
+<div class="box">
+
+<h3>버튼 클릭 할 때마다 상태값을 변경</h3>
+	<input type="button" value="확인" id="btn1">
+	<br><br>
+	
+	<div id="result1">
+		<form>
+			체크박스(라디오버튼) : 
+			<input type="checkbox" id="checkTest" checked><br><br>
+			리스트박스(select객체) :
+			<select id="selTest">
+			
+			<option value= "1">하나</option>
+			<option value= "2">둘</option>
+			<option value= "3" selected >셋</option>
+			<option value= "4">넷</option>
+			
+			</select><br><br>
+			text객체 (readonly) : 
+			<input type="text" value="가나다" id="selected"><br><br>
+			button객체(disabled) :
+			<input type="button" value="실행" id="runBtn" >
+		</form>
+	</div>
+</div>
+
+
+</body>
+</html>

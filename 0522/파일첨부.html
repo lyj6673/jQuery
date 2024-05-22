@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script src="../js/jquery-3.7.1.js"></script>
+<script>
+$(()=>{
+	let count =0;
+	//새로운 파일 첨브와 삭제 버튼 생성
+	$('#add').on('click', function(){
+		count ++;
+		vfile = $('<p><input type="file"><input type="button" value="삭제' + count +'" class="file"></p>');
+		
+		vfile.appendTo($('#result1'));
+	})
+	
+	//새롭게 생긴 삭제 버튼에 대한 이벤트 핸들러 작성 - delegate
+	$(document).on('click', '.file', function(){
+		$(this).parent().remove();
+	})
+})
+</script>
+</head>
+<body>
+
+<div class="box">
+
+<h3></h3>
+	<input type="file">
+	<input type="button" value="확인" id="add">
+	<br><br>
+	
+	<div id="result1"></div>
+</div>
+</body>
+</html>

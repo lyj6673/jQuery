@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script src="../js/jquery-3.7.1.js"></script>
+<script>
+$(()=>{
+	$('#btn1').on('click', ()=>{
+		//전체 이미지를 대상으로 같은값을 title로 설정
+		//$('img').attr('title', '이미지');
+		
+		$('img').attr('title', function(){
+			//src속성값 가져오기
+			vsrc = $(this).attr('src');
+			start = vsrc.lastIndexOf("/")+1;
+			end = vsrc.lastIndexOf(".");
+			
+			vtitle = vsrc.slice(start, end);
+			
+			return vtitle;
+		})
+	})
+})
+</script>
+<style>
+img{
+	width : 100px;
+	height : 100px;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+
+<h3></h3>
+	<input type="button" value="확인" id="btn1">
+	<br><br>
+	
+	<div id="result1">
+	<img src="../images/flower-1.jpg" alt="flower-1.jpg">
+	<img src="../images/국화4.jpg" alt="국화4.jpg">
+	<img src="../images/단풍.jpg" alt="단풍.jpg">
+	<img src="../images/대나무숲.jpg" alt="대나무숲.jpg">
+	<img src="../images/image.6.jpg" alt="image.6.jpg">
+	</div>
+</div>
+</body>
+</html>

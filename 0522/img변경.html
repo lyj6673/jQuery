@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script src="../js/jquery-3.7.1.js"></script>
+<script>
+$(()=>{
+	
+	let oldimg = "";
+	
+	$('img').on('mouseover', function(){
+		//src속성값을 가져온다 -attr('src')
+		oldimg = $(this).attr('src');
+		
+		//새로운 이미지로 변경 - temp의 값을 가져온다.
+		vtemp = $(this).attr('temp');
+		//src 속성으로 변경한다.
+		$(this).attr('src',`../images/${vtemp}`);
+	})
+	
+	$('img').on('mouseout', function(){
+		$(this).attr('src',oldimg);
+	})
+	
+	//이미지를 더블클릭하면 이미지가 사라짐 -//다사라졋는지 비교 // 보이기버튼을 새롭게 생성
+	$('img').on('dblclick', function(){
+		$(this).hide();
+		
+		//다 사라졌는지 비교
+		if($('img:visible').length <1){
+			//보이기버튼을 새롭게 생성
+			vshow = $('<input type="button" value="보이기" class="showb">');
+			vshow.prependTo('.box');
+		}
+	})
+	
+	//새롭게 생성한 보이기 버튼에 대한 이벤트 핸들러 작성 - delegate
+	$(document).on('click', '.showb', function(){
+		
+		//이미지 보이기
+		$('img').show();
+		
+		//보이기버튼은 다시 사라진다
+		$(this).hide();
+	})
+})
+
+</script>
+<style>
+img{
+	width:100px;
+	height: 100px;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+
+<h3>mouseover : 다른 이미지로 변경<br>
+	mouseout : 원래이미지가 표시됨<br>
+	dblclick : 이미지가 사라진다<br>
+	이미지가 다 사라지면_ 보이는 이미지의 갯수가 0개이면 - 보이기 버튼을 표시한다<br>
+	보이기버튼을 클릭하면 이미지가 다시 보여진다</h3>
+	
+	<h3>다른 이미지를 temp속성에 설정<br>
+	src속성값을 변수에 대입
+	temp속성의 값을 src속성 값으로 변경<br>
+	변수의 값을 src속성값으로 다시 가져온다.</h3>
+	<div id="result1">
+		<img src="../images/image.1.jpg" alt="image.1.jpg" temp="국화3.jpg">
+		<img src="../images/image.2.jpg" alt="image.2.jpg" temp="단풍.jpg">
+		<img src="../images/image.3.jpg" alt="image.3.jpg" temp="수국6.jpg">
+		<img src="../images/image.4.jpg" alt="image.4.jpg" temp="셔틀콕.jpg">
+		<img src="../images/image.5.jpg" alt="image.5.jpg" temp="풍차.jpg">
+	</div>
+</div>
+</body>
+</html>
