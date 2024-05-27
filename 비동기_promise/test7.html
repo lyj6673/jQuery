@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script>
+function login(username){
+	return new Promise((resolve, reject) =>{
+		setTimeout( ()=>{
+			if(username){
+				resolve(username)
+			}else{
+				reject(new Error("name을 입력하세요"))
+			}
+		},1000);
+	})
+}
+
+// login("김은대")
+// .then((user)=>{
+// 	console.log(`${user}님 안녕하세요`);
+// })
+// .catch( (error)=>{
+// 	console.log(error);
+// })
+
+function addToCart(product){
+	return new Promise((resolve, reject) => {
+		setTimeout( ()=>{
+			if(product){
+				resolve(product)
+			}else{
+				reject(new Error("상품이 없습니다"))
+			}
+		},1000);
+	})
+}
+
+// addToCart("딸기")
+// .then((prod) =>{
+// 	console.log(`${prod}를 장바구니에 넣었습니다.`);
+// })
+// .catch( (error)=>{
+// 	console.log(error);
+// })
+
+function makePayment(cardNo, product){
+	return new Promise((resolve, reject) => {
+		setTimeout( ()=>{
+			if(cardNo.length != 12){
+				reject(new Error("상품이 없습니다"))
+				return;
+			}
+			
+			if(!product){
+				reject(new Error("상품을 넣어주세요"))
+				return;
+			}
+			
+			resolve(product)
+			
+		},1000);
+	})
+}
+
+// makePayment('123412341234', '딸기')
+// .then( (product) =>{
+// 	console.log(`${product}를 결제했습니다`)
+// })
+// .catch( (err)=>{
+// 	console.log(err);
+// })
+
+
+//--전체실행--
+login("김은대")
+.then(user => {
+	console.log(`${user}님 안녕하세요`);
+	return addToCart("딸기");
+})
+.then((prod)=>{
+	console.log(`${prod}를 장바구니에 넣었어요`);
+	return makePayment('123412341234', prod)
+})
+.then(prod => {
+	console.log(`${prod}를 결제했습니다.`);
+
+})
+.catch( (error)=>{
+	console.log(error);
+})
+
+</script>
+</head>
+<body>
+
+<div class="box">
+
+<h3></h3>
+	<input type="button" value="확인" onclick="proc1()">
+	<br><br>
+	
+	<div id="result1"></div>
+</div>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script>
+
+//로그인/장바구니/결제하기
+//로그인 - 장바구니 - 결제하기 
+
+//로그인 함수 정의
+function login(username, fncall){
+	setTimeout( ()=> {
+		fncall(username);
+	}, 1000);
+}
+
+// login('김은대', dataname =>{
+// 	console.log(`${dataname}님 안녕하세요`);
+	
+// 	addToCart("딸기", item=>{
+// 		console.log(`${item}을 장바구니에 넣었습니다`);
+		
+// 		makePayment("123412341234", "딸기", (cardN, prod)=>{
+// 			console.log(`${cardN.slice(0,4)}******* 으로 ${prod}를 구매했습니다`);
+// 		})
+// 	})
+	
+// })
+
+//장바구니 함수 정의
+function addToCart(product, fncall){
+	setTimeout(()=>{
+		fncall(product);
+	}, 1000)
+}
+
+
+
+function makePayment(cardNo, product, fncall){
+	setTimeout(()=>{
+		fncall(cardNo, product);
+	}, 1000)
+}
+
+// 장바구니 결제하고 review, review후 쿠폰 받기
+//콜백지옥 - 유지보수 문제, 복잡하다
+// 콜백 지옥 해결 - promise 객체
+login('김은대', dataname =>{
+ 		console.log(`${dataname}님 안녕하세요`);
+		})
+addToCart("딸기", item=>{
+		console.log(`${item}을 장바구니에 넣었습니다`);
+		})
+	
+makePayment("123412341234", "딸기", (cardN, prod)=>{
+			console.log(`${cardN.slice(0,4)}******* 으로 ${prod}를 구매했습니다`);
+			
+			review( ()=>{
+				getCoupon(()=>{
+					skgskd(()=>{
+						
+					})
+					
+				})
+			})
+		})
+
+// 호출순서와 응답순서는 다르다
+//  login('김은대')
+//  console.log(`${dataname}님 안녕하세요`);
+//  addToCart("딸기");
+//  console.log(`${item}을 장바구니에 넣었습니다`);
+//  makePayment("123412341234", "딸기");
+//  console.log(`${cardN.slice(0,4)}******* 으로 ${prod}를 구매했습니다`);
+</script>
+</head>
+<body>
+
+<div class="box">
+
+<h3></h3>
+	<input type="button" value="확인" onclick="proc1()">
+	<br><br>
+	
+	<div id="result1"></div>
+</div>
+</body>
+</html>

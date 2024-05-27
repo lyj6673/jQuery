@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script>
+
+function getData(fncall){
+	setTimeout(()=>{
+		console.log("서버에서 데이터 받아오기 - id가 a001인 테이터의 이름 가져오기")
+		
+		vname = "김은대"
+		//콜백함수로 name을 전달해서 출력
+		fncall({name : "김은대"})
+	}, 2000)
+}
+
+getData(function(data){
+	console.log(`id가 a001인 결과 데이터 ${data.name}`)
+})
+
+// function getData(){
+// 	setTimeout(()=>{
+// 		console.log("서버에서 데이터 받아오기 - id가 a001인 테이터의 이름 가져오기")
+		
+// 		vname = "김은대"
+// 	}, 2000)
+// }
+
+// getData();
+// console.log(`결과 데이터 : ${vname}`);
+
+</script>
+</head>
+<body>
+
+<div class="box">
+
+<h3></h3>
+	<input type="button" value="확인" onclick="proc1()">
+	<br><br>
+	
+	<div id="result1"></div>
+</div>
+</body>
+</html>

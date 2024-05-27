@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script src="../js/jquery-3.7.1.js"></script>
+<script>
+
+const xhr = new XMLHttpRequest();
+$( ()=>{
+	
+	$('#jobj').on('click', function(){
+		
+	
+	
+	//서버로부터 jsonobj데이터를 응답 받는 비동기 처리
+	xhr.open("get", "jobj.jsp", true);
+	xhr.send()
+	
+	//응답 - jobj.jsp가 요청에 의해서 실행된 후 생성된 결과를 가져온다.
+	xhr.omload = function(){
+		if(this.readyState == 4 && this.status == 200){
+			//데이터 응답 받기 - 응답데이터의 형식 json 객체 형식의 문자열
+			res = this.reponseText;
+			
+			//res 자바스크립트 객체로 변환 - JSON.parse(json형식의 텍스트데이터)
+			res = JSON.parse(res);
+			
+			code = `<p>이름 : ${res.name} </p>
+					<p>주소 : ${res.addr} </p>
+					<p>전화번호 : ${res.tel} </p>`
+					
+			$('#result1').html(code);
+			} //if	
+		} //xhr.onload
+	
+	})//onclick
+	
+	$('#jobjarr').on('click', function(){
+		//요청
+		xhr.open("get", "jobarr.jsp?id=", true);
+		xhr.send();
+		//응답 
+		
+		xhr.omload = function(){
+			if(this.readyState == 4 && this.status == 200){
+				
+				//결과를 응답 받는다 - 요청한 jobarr.jsp에서 json형식의 텍스트
+				res = this.responseText;
+				
+				res = JSON.parse(res); //결과값 json object배열
+				
+				let code = "";
+				
+				/*for(i=0; i<res.length; i++){
+					code = `<p>이름 : ${res[i].name} </p>
+						<p>주소 : ${res[i].addr} </p>
+						<p>전화번호 : ${res[i].tel} </p>`;
+				}*/
+				
+				//방법2
+				/*res.forEach(data){
+				code += `<p>이름 : ${data.name} </p>
+				<p>주소 : ${data.addr} </p>
+				<p>전화번호 : ${data.tel} </p>`;
+				}*/
+				
+				//방법 3
+				$.each(res, function(i, v){
+					code += `<p>이름 : ${v.name} </p>
+						<p>주소 : ${v.addr} </p>
+						<p>전화번호 : ${v.tel} </p>`;
+				}) //반복문
+				
+				$('#result2').html(code);
+				
+			} //if
+		}//onload
+		
+	})//onclick
+	
+	
+})//$(function())
+</script>
+</head>
+<body>
+
+<div class="box">
+
+<h3></h3>
+	<input type="button" value="jsonobj" id="jobj">
+	<input type="button" value="jsonobjarr" id="jobjarr">
+	<br><br>
+	
+	<div id="result1"></div>
+	<div id="result2"></div>
+</div>
+</body>
+</html>

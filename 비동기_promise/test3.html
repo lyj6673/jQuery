@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script>
+	const promi = new Promise((resolve, reject)=>{
+		setTimeout (()=>{
+			
+			//db에서 처리하기
+			//const data = null;
+			const data = {name : "김은대"};
+			
+			if(data != null){
+				console.log("데이터 가져오기 성공....");
+				resolve(data);
+			}else{
+				reject(new Error("데이터 가져오기 실패..."));
+			}
+		},1000);
+	})
+
+	setTimeout(()=>{
+		console.log(promi);
+	},2000)
+</script>
+</head>
+<body>
+
+<div class="box">
+
+<h3></h3>
+	<input type="button" value="확인" onclick="proc1()">
+	<br><br>
+	
+	<div id="result1"></div>
+</div>
+</body>
+</html>

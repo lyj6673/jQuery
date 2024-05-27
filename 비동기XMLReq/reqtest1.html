@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script src="../js/jquery-3.7.1.js"></script>
+<script>
+
+const xhr = new XMLHttpRequest();
+
+$(function(){
+	
+	
+	// post방식 수행 - 비동기
+	$('#asypost').on('click', ()=>{
+		//입력한 이름과 전화번호 가져오기
+		let vname = $('#ff2 #name').val();
+		
+		if(vname.length<1){
+			alert("이름을 입력하세요");
+			return;
+		}
+		
+		let vtel = $('#ff2 #tel').val();
+		
+		if(vtel.length<1){
+			alert("전화번호를 입력하세요");
+			return;
+		}
+		
+		//요청
+		data = 'name=' + vname + '&tel=' + vtel
+		xhr.open('post', 'test1.jsp', true);
+		xhr.setRequestHeader("Content-type","application/x-www-form-urlencoded");
+		
+		xhr.send(data);
+		
+		//응답
+		
+		xhr.onload = function(){
+			if(this.readyState == 4 && this.status == 200){
+				res = this.responseText;
+				
+				$('#result2').html(res);
+			}
+		}
+	})
+	
+	
+	
+	
+	// get방식 수행 - 비동기
+	$('#asybut').on('click', function(){
+		
+		//입력한 이름과 전화번호 가져오기
+		let vname = $('#ff1 #name').val();
+		
+		if(vname.length<1){
+			alert("이름을 입력하세요");
+			return;
+		}
+		
+		let vtel = $('#ff1 #tel').val();
+		
+		if(vtel.length<1){
+			alert("전화번호를 입력하세요");
+			return;
+		}
+		
+		//요청
+		xhr.open('get', 'test1.jsp?name=' + vname + '&tel=' + vtel)
+		xhr.send();
+		
+		//응답
+		xhr.onreadystatechange = function(){
+			alert(this.readyState);
+			if(this.readyState == 4 && this.status == 200){
+				res = this.responseText;
+				
+				$('#result1').html(res);
+			}
+			
+		}
+	})
+})
+</script>
+</head>
+<body>
+
+<div class="box">
+
+<h3>비동기 전송과 동기전송<br>
+비동기 전송 : 페이지 이동없이 결과를 출력 - result1에 출력<br>
+동기 : 페이지를 다시 로드하여 결과를 받는다.</h3>
+
+<br>
+
+	<form id="ff1" action="test1.jsp" method="get">
+	이름<input type="text" name="name" id="name"><br>
+	전화번호<input type="text" name="tel" id="tel"><br><br>
+	
+	
+	<input type="submit" value="동기">
+	<input type="button" value="비동기" id="asybut">
+	</form>
+	
+	<br><br>
+	<br><br>
+	
+	<div id="result1"></div>
+</div>
+
+<div class="box">
+
+<h3>비동기 전송과 동기전송 - post<br>
+비동기 전송 : 페이지 이동없이 결과를 출력 - result2에 출력<br>
+동기 : 페이지를 다시 로드하여 결과를 받는다.</h3>
+
+<br>
+
+	<form id="ff2" action="test1.jsp" method="post">
+	이름<input type="text" name="name" id="name"><br>
+	전화번호<input type="text" name="tel" id="tel"><br><br>
+	
+	
+	<input type="submit" value="동기">
+	<input type="button" value="비동기" id="asypost">
+	</form>
+	
+	<br><br>
+	<br><br>
+	
+	<div id="result2"></div>
+</div>
+</body>
+</html>
