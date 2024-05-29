@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script src="http://localhost/jqpro/js/jquery-3.7.1.js"></script>
+<script>
+
+$( () =>{
+	$('#obj').on('click', function(){
+		fetch('jobj.jsp')
+		.then(res => res.json())
+		.then(data => {
+			let code = `이름 : ${data.name}<br>
+						주소 : ${data.addr}<br>
+						전화번호 : ${data.tel}<br>`;
+						
+					$('#result2').html(code);
+		})
+	})
+	
+	$('#arr').on('click', function(){
+		fetch("jsonarr.jsp")
+		.then(res=> res.json())
+		.then(data =>{
+			let code = "<ul>";
+		
+			data.forEach(function(i,v){
+				code += "<li>" + data[i] + "</li>"
+		})
+		
+			code+="</ul>";
+			
+			document.getElementById('result3').innerHTML = code;
+		})
+	})
+	
+	$('#objarr').on('click', function(){
+		fetch("jobarr.jsp")
+		.then(res=> res.json())
+		.then(data =>{
+			
+			let code ="";
+			
+			$.each(data, function(i, v){
+				
+				code += `이름 : ${v.name}<br>
+						주소 : ${v.addr}<br>
+						전화번호 : ${v.tel}<br>
+						<hr color="blue">`
+					})	
+			
+			$('#result4').html(code);
+		})
+	})
+})
+
+window.onload = function(){
+	document.getElementById('text').addEventListener('click', function(){
+		fetch('text.jsp')
+		.then(function(res){
+			console.log("res===", res);
+			if(!res.ok){
+				throw new Error(`오류발생 :${res.statusText}`);
+			}
+		return res.text()
+		})
+		.then(function(data){ //실제 데이터가 리턴
+		console.log("data ===", data);
+		
+		//출력내용
+		datas = data.split("/"); //datas의 결과는 배열
+		
+		let code = "<ul>";
+		
+		datas.forEach(function(i, v){
+			code += "<li>" + datas[i] + "</li>"
+		})
+		
+			code+="</ul>";
+			
+			document.getElementById('result1').innerHTML = code;
+		})
+		.catch(function(err){
+			console.error(err);
+		})
+	
+	})
+	
+	
+}
+</script>
+<style>
+.result{
+	display : flex;
+	flex-direction: row;
+}
+.result div{
+	box-sizing : border-box;
+	flex : 25%;
+}
+</style>
+</head>
+<body>
+
+<div class="box">
+
+<h3></h3>
+	<input type="button" value="text" id="text">
+	<input type="button" value="obj" id="obj">
+	<input type="button" value="arr" id="arr">
+	<input type="button" value="objarr" id="objarr">
+	<br><br>
+	
+	<div class="result">
+		<div id="result1"></div>
+		<div id="result2"></div>
+		<div id="result3"></div>
+		<div id="result4"></div>
+	</div>
+</div>
+</body>
+</html>

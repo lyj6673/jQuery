@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet" href="../css/public.css">
+<script src="http://localhost/jqpro/js/jquery-3.7.1.js"></script>
+<script>
+//직렬화 하여 전송하는 함수
+const createFnseri = () =>{
+	vid = $('#id').val();
+	vname = $('#name').val();
+	vemail= $('#email').val();
+	
+	fetch('paramseri.jsp',{
+		method : 'post',
+		headers : {
+			"Content-type" : "application/json;charset=utf-8"
+		},
+		body : JSON.stringify({id : vid , name : vname, email : vemail})
+	})
+	.then(res=>{
+		if(res.ok)
+			return res.json();
+		else
+			throw new Error(res.statusText)
+	})
+	.then(json => console.log("json===", json))
+	.catch(err => console.log(err));
+}
+
+const createFn = () =>{
+		vid = $('#id').val();
+		vname = $('#name').val();
+		vemail= $('#email').val();
+		
+		fetch('params.jsp',{
+			method : 'post',
+			headers : {
+				"Content-type" : "application/x-www-form-urlencoded"
+			},
+			body : "id=" + vid + "&name=" + vname + "&email=" + vemail
+		})
+		.then(res=>{
+			if(res.ok)
+				return res.json();
+			else
+				throw new Error(res.statusText)
+		})
+		.then(json => {
+			console.log("json===", json);
+		
+		let code = `아이디 : ${json.id}<br>
+					이름 : ${json.name}<br>
+					이메일 : ${json.email}<br>
+					<hr color = "blue">`
+					
+			$('#result1').html(code);
+		})
+		.catch(err => console.log(err));
+		
+}
+
+
+$(()=>{
+	$('#send').on('click', function(){
+		createFn();
+	})
+	
+	//직렬화 전송
+	$('#serisend').on('click', function(){
+		createFnseri();
+	})
+})
+</script>
+</head>
+<body>
+
+<div class="box">
+
+<h3></h3>
+<form>
+	<input type="text" placeholder="아이디" name="id" id="id"><br>
+	<input type="text" placeholder="이름" name="name" id="name"><br>
+	<input type="text" placeholder="이메일" name="email" id="email"><br>
+	
+	<input type="button" value="전송" id="send">
+	<input type="button" value="직렬화전송" id="serisend">
+</form>
+	<br><br>
+	
+	<div id="result1"></div>
+</div>
+</body>
+</html>
